@@ -1,0 +1,22 @@
+body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 5em;
+    width: 60%;
+}
+
+a {
+    text-decoration: none;
+    color: #386BF3;
+    font-weight: 400;
+}
+pre {
+    font-size: 14px;
+    background-color: hsl(210, 14.3%, 93.3%);
+    border-radius: 4px;
+    padding: 1em;
+    margin-top: 1em;
+    margin-bottom: 2em;
+    width: 100%;
+}
