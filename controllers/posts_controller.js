@@ -24,7 +24,13 @@ posts.get('/:pet_type/', async(req, res) => {
 
         //orderby should be a string of either "desc" or "asc"
         let orderBy = req.query.orderby
-
+        if (!orderBy) {
+            orderBy = "DESC"
+        }
+        // by default, the list will come up in descending order according to the date of the created post
+        // example: /posts/cat/?orderby=asc
+        // default: /posts/cat/?orderby=desc or
+        // /posts/dog/?orderby=desc
 
         const queryForPets = await pool.query(`SELECT * FROM pets WHERE pet_type = $1 ORDER BY created_at ${orderBy}`, [pet_type])
 
