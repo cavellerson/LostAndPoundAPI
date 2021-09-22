@@ -8,14 +8,17 @@ require('dotenv').config();
 app.use(express.json())
 app.use(cors())
 app.use(express.urlencoded({ extended: false }))
+app.use(express.static('public'))
 
 
-app.get('/API', (req, res) => {
-    res.send("app works!")
-})
+
 
 app.get('/', (req, res) => {
-    res.send("API INFO/Homepage")
+    res.redirect('/home')
+})
+
+app.get('/home', (req, res) => {
+    res.render('homepage.ejs')
 })
 
 const postsController = require('./controllers/posts_controller.js')
