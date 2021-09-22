@@ -1,6 +1,7 @@
 CREATE TABLE pets(
   id SERIAL PRIMARY KEY,
   pet_name VARCHAR(15),
+  pet_type VARCHAR(3),
   information TEXT,
   zip_code INT,
   picture_url TEXT,
