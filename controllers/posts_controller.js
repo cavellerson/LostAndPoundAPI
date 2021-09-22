@@ -31,6 +31,8 @@ posts.get('/:pet_type/', async(req, res) => {
         // example: /posts/cat/?orderby=asc
         // default: /posts/cat/?orderby=desc or
         // /posts/dog/?orderby=desc
+        // dogSize = {0:"x-small", 1:"small", 2:"medium", 3:"large", 4:"x-large", 5:"xx-large"}
+        // catSize = {6:"kitten", 7:"cat"}
 
         const queryForPets = await pool.query(`SELECT * FROM pets WHERE pet_type = $1 ORDER BY created_at ${orderBy}`, [pet_type])
 
@@ -46,11 +48,13 @@ posts.get('/:pet_type/', async(req, res) => {
 
 posts.post('/', async(req, res) => {
     try {
-
-        let pet_name = req.body.pet_name
         let pet_type = req.body.pet_type
-        let information = req.body.information
+        let pet_name = req.body.pet_name
         let zip_code = req.body.zip_code
+        let coat_color = req.body.coat_color
+        let eye_color = req.body.eye_color
+        let sex = req.body.sex
+        let misc = req.body.misc
         let picture_url = req.body.picture_url
         let date_lost = req.body.date_lost
         let pet_size = req.body.pet_size
@@ -60,12 +64,12 @@ posts.post('/', async(req, res) => {
 
 
         const newPost = await pool.query(
-            "INSERT INTO pets (pet_name, pet_type, information, zip_code, picture_url, date_lost, pet_size, phone_number, email) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *", [pet_name, pet_type, information, zip_code, picture_url, date_lost, pet_size, phone_number, email]
+            "INSERT INTO pets (pet_type, pet_name, zip_code, coat_color, eye_color, sex, misc, picture_url, date_lost, pet_size, phone_number, email) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *", [pet_type, pet_name, zip_code, coat_color, eye_color, sex, misc, picture_url, date_lost, pet_size, phone_number, email]
         )
         console.log(newPost["rows"]);
         res.json(newPost["rows"])
 
-        // INSERT INTO pets (pet_name, information, zip_code, picture_url, date_lost, pet_size, phone_number, email) VALUES ('dogman', 'hes a dog', 28314, 'https://www.cdc.gov/healthypets/images/pets/angry-dog.jpg?_=03873', '9-12-2021', 1, '8888888888', 'someguy@guysome.com');
+        // INSERT INTO pets (pet_type, pet_name, zip_code, coat_color, eye_color , sex, misc, picture_url, date_lost, pet_size, phone_number, email) VALUES ('dog', 'fido', 28314, 'black', 'brown', 'male', 'he loves watermelons', 'someurl', '2021-9-22', 0, '8888888888', 'someguy@guysome.com');
 
 
 
