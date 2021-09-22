@@ -5,5 +5,8 @@ CREATE TABLE pets(
   zip_code INT,
   picture_url TEXT,
   date_lost DATE,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  pet_size INT,
+  phone_number TEXT,
+  email TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
