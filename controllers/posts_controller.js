@@ -5,11 +5,11 @@ const posts = express.Router();
 const cors = require('cors')
 
 posts.use(cors())
-posts.get('/allpets', async(req, res) => {
+posts.get('/pets', async(req, res) => {
     try {
         // orders by post created at by default in DESCENDING ORDER
         const queryForAllPets = await pool.query("SELECT * FROM pets ORDER BY created_at DESC;")
-        console.log(queryForAllPets);
+        // console.log(queryForAllPets);
         res.json(queryForAllPets["rows"])
 
     } catch(error) {
@@ -17,7 +17,7 @@ posts.get('/allpets', async(req, res) => {
     }
 })
 
-posts.get('/:pet_type/', async(req, res) => {
+posts.get('/pets/:pet_type/', async(req, res) => {
     try {
         //type type is either "dog" or "cat"
         let pet_type = req.params.pet_type
@@ -37,7 +37,7 @@ posts.get('/:pet_type/', async(req, res) => {
         const queryForPets = await pool.query(`SELECT * FROM pets WHERE pet_type = $1 ORDER BY created_at ${orderBy}`, [pet_type])
 
 
-        console.log(queryForPets["rows"]);
+        // console.log(queryForPets["rows"]);
         // console.log(queryForAllDogs);
         res.json(queryForPets["rows"])
 
