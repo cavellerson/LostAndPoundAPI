@@ -10,6 +10,7 @@ CREATE TABLE pets(
   picture_url TEXT,
   date_lost DATE,
   pet_size INT,
+  age TEXT,
   phone_number TEXT,
   email TEXT,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP

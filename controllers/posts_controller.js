@@ -58,18 +58,19 @@ posts.post('/', async(req, res) => {
         let picture_url = req.body.picture_url
         let date_lost = req.body.date_lost
         let pet_size = req.body.pet_size
+        let age = req.body.age
         let phone_number = req.body.phone_number
         let email = req.body.email
 
 
 
         const newPost = await pool.query(
-            "INSERT INTO pets (pet_type, pet_name, zip_code, coat_color, eye_color, sex, misc, picture_url, date_lost, pet_size, phone_number, email) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING *", [pet_type, pet_name, zip_code, coat_color, eye_color, sex, misc, picture_url, date_lost, pet_size, phone_number, email]
+            "INSERT INTO pets (pet_type, pet_name, zip_code, coat_color, eye_color, sex, misc, picture_url, date_lost, pet_size, age, phone_number, email) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *", [pet_type, pet_name, zip_code, coat_color, eye_color, sex, misc, picture_url, date_lost, pet_size, age, phone_number, email]
         )
         console.log(newPost["rows"]);
         res.json(newPost["rows"])
 
-        // INSERT INTO pets (pet_type, pet_name, zip_code, coat_color, eye_color , sex, misc, picture_url, date_lost, pet_size, phone_number, email) VALUES ('dog', 'fido', 28314, 'black', 'brown', 'male', 'he loves watermelons', 'someurl', '2021-9-22', 0, '8888888888', 'someguy@guysome.com');
+        // INSERT INTO pets (pet_type, pet_name, zip_code, coat_color, eye_color , sex, misc, picture_url, date_lost, pet_size, age, phone_number, email) VALUES ('dog', 'fido', 28314, 'black', 'brown', 'male', 'he loves watermelons', 'someurl', '2021-9-22', 0, 'puppy', '8888888888', 'someguy@guysome.com');
 
 
 
